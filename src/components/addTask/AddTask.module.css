@@ -1,0 +1,59 @@
+form{
+  height: 15rem;
+}
+
+input, textarea{
+  border: none;
+  outline: none;
+  background-color: aliceblue;
+  height: 100%;
+  width: 100%;
+}
+
+input{
+  grid-area: input;
+  border-bottom: 1px dotted rgb(15, 17, 129);
+  font-weight: 600;
+  font-size: medium;
+}
+
+textarea{
+  grid-area: textarea;
+}
+
+.card{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: .5rem;
+  background-color: aliceblue;
+  border-radius: .25rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  width: 24rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 3fr;
+  row-gap: 1rem;
+  grid-template-areas: 
+    'input'
+    'textarea'
+}
+
+.add{
+  position: absolute;
+  bottom: -1.5rem;
+  right: 2rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background-color: rgb(255, 184, 4);
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: .3s;
+}
+
+.add:hover{
+  transition: .3s;
+  transform: scale(.9);
+}

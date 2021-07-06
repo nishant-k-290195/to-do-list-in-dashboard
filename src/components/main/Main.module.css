@@ -1,0 +1,18 @@
+.container{
+  grid-area: main;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-items: center;
+  grid-gap: 8rem;
+}
+
+.card{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: aliceblue;
+  height: 16rem;
+  width: 16rem;
+  padding: 1rem;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
