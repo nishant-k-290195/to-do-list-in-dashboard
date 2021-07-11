@@ -2,14 +2,28 @@
 @import '../sidebar/Sidebar.module.css';
 @import '../../App.css';
 
-.layout{
+.main_layout{
   transition:.3s;
   height: 100vh;
   display: grid;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   grid-template-columns: .05fr 1fr 1fr 1fr;
   grid-template-rows: .2fr 3fr;
   grid-template-areas: 
     "navbar navbar navbar navbar"
     "sidebar app app app";
+}
+
+.login_layout{
+  transition:.3s;
+  height: 100vh;
+  width: 100%;
+  grid-template-columns: 1fr;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
 }

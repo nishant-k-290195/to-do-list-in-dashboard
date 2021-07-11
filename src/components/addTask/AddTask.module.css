@@ -1,8 +1,8 @@
-form{
+.main{
   height: 15rem;
 }
 
-input, textarea{
+.card input, textarea{
   border: none;
   outline: none;
   background-color: aliceblue;
@@ -10,14 +10,14 @@ input, textarea{
   width: 100%;
 }
 
-input{
+.card input{
   grid-area: input;
   border-bottom: 1px dotted rgb(15, 17, 129);
   font-weight: 600;
   font-size: medium;
 }
 
-textarea{
+.card textarea{
   grid-area: textarea;
 }
 

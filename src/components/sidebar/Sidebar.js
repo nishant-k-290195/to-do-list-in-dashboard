@@ -15,21 +15,21 @@ const sidebarState = useSelector(state => state.sidebarReducer)
       <div className={SidebarStyles.container}>
         <Link to='/' className={SidebarStyles.link}>
           <div className={SidebarStyles.menu}>
-            <ImHome3 />
-            <p className={!sidebarState? SidebarStyles.menuClosed : null}>Dashboard</p>
+            <ImHome3 className={SidebarStyles.icon}/>
+            <p className={!sidebarState? SidebarStyles.menuClosed : SidebarStyles.menuOpen}>Dashboard</p>
           </div>
         </Link>
         <div className={SidebarStyles.nav}>
           <Link to='/to-do-list' className={SidebarStyles.link}>
             <div className={SidebarStyles.menu}>
-              <BsCardChecklist />
-              <p className={!sidebarState? SidebarStyles.menuClosed : null}>To Do List</p>
+              <BsCardChecklist className={SidebarStyles.icon}/>
+              <p className={!sidebarState? SidebarStyles.menuClosed : SidebarStyles.menuOpen}>To Do List</p>
             </div>
           </Link>
           <Link to='/accomplished-tasks' className={SidebarStyles.link}>
             <div className={SidebarStyles.menu}>
-              <CgPlayListCheck />
-              <p className={!sidebarState? SidebarStyles.menuClosed : null}>Accomplished Task List</p>
+              <CgPlayListCheck  className={SidebarStyles.icon}/>
+              <p className={!sidebarState? SidebarStyles.menuClosed : SidebarStyles.menuOpen}>Accomplished Task List</p>
             </div>
           </Link>
         </div>

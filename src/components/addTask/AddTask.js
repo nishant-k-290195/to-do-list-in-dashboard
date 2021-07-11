@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AddTaskStyles from './AddTask.module.css'
 import { addItem } from '../../state/toDoListSlice/actions/action'
 import { useDispatch } from "react-redux";
 import { GrAdd } from 'react-icons/gr'
+
 const AddTask = () => {
-  const [newTask, setNewTask] = useState('')
+  const [newTask, setNewTask] = useState({ title:'', desc:'' })
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
-    setNewTask(e.target.value)
+    setNewTask(prev => ({ ...prev, [e.target.name]: e.target.value} ))
   }
 
   const handleClick = (e) => {
@@ -17,10 +18,10 @@ const AddTask = () => {
   }
 
   return (
-    <form>
+    <form className={AddTaskStyles.main}>
       <div className={AddTaskStyles.card}>
-        <input name='newTask' type="text" placeholder='Title' onChange={handleChange} />
-        <textarea name='newTask' type="text" placeholder='Describe...' onChange={handleChange} />
+        <input name='title' type="text" placeholder='Title' onChange={handleChange} />
+        <textarea name='desc' type="text" placeholder='Describe...' onChange={handleChange} />
         <button className={AddTaskStyles.add} onClick={handleClick}><GrAdd /></button>
       </div>
     </form>

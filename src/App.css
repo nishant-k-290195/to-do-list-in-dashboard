@@ -1,9 +1,10 @@
 .container{
-  background-color: #F1F5F5;
+  background-color: #f5f1f3;
   display: grid;
   align-items: start;
   justify-content: center;
-  padding: 2.5rem;
   overflow-y: scroll;
   grid-area: app;
+  height: 100%;
+  padding: 2.5rem;
 }
