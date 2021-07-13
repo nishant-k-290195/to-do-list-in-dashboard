@@ -1,44 +1,62 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import toDoListStyles from './ToDoList.module.css'
 import { BiEdit } from 'react-icons/bi'
 import { IoMdTrash } from 'react-icons/io'
 import AddTask from '../addTask/AddTask'
-import { readItem, updateItem, deleteItem, deleteItems } from '../../state/toDoListSlice/actions/action'
+import { fetchToDoList, updateItem, deleteItem, deleteItems } from '../../api/toDoList'
 import { useSelector, useDispatch } from 'react-redux'
 import { CgMoveRight } from 'react-icons/cg'
-import {db} from '../../firebase'
+import {firebaseApp, toDoListRef} from '../../firebase'
+import { ContactPhoneTwoTone, SelectAll } from '@material-ui/icons'
+import { selectItems } from '../../state/toDoListSlice/actions/action'
+var testArray = []
+var fetchedPostArr = []
 
 const ToDoList = () => {
   
-  const toDoListArr = useSelector( state => state.toDoListReducer.toDoList )
+  const toDoListArr = useSelector( state => state.toDoListReducer )
+  const [toDo, setToDo] = useState([])
+
   const [checkAllState, setCheckAllState] = useState(false)
   const [view, setView] = useState(false)
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   db.collection('toDoList').onSnapshot(snapshot => {
-  //     // console.log(snapshot.docs.map(doc => doc.data()))
-  //     setNewTask(snapshot.docs.map(doc => doc.data().newTask))
-  //   })
-  // }, [])
+  const handleEdit = (item, key) => {
+    updateItem()
+  }
 
   const handleDelete = (key) => {
-    dispatch(deleteItem(key))
+    deleteItem()
+  }
+
+  const handleDeleteAll = (key) => {
+    deleteItems()
   }
 
   const handleSelectAll = (key) => {
     setCheckAllState(() => !checkAllState)
   }
 
-  const handleDeleteAll = (key) => {
-    if(checkAllState){
-      dispatch(deleteItems(key))
-      setCheckAllState(!checkAllState)
+  useEffect( () =>  {
+    const fetchData = async () => {
+      try{
+        toDoListRef.on('value',  snapshot => {
+          setToDo((prevTodo) => [...prevTodo, ...Object.entries(snapshot.val())])
+          const fetchedPostObject =  snapshot.val()
+          fetchedPostArr = Object.entries(fetchedPostObject)
+          setToDo((prevTodo) => [...prevTodo, ...fetchedPostArr])
+        })
+      }catch(err){
+        // console.log(err)
+      }
     }
-  }
+    fetchData()
+  }, [])
 
   return (
+    
     <div className={toDoListStyles.container}>
+
       <AddTask />
       <div>
         <div className={toDoListStyles.listbar}>
@@ -57,12 +75,12 @@ const ToDoList = () => {
           </div>
         <div className={toDoListStyles.toDolist}>
         {
-          toDoListArr.map((element, index) => { 
+          toDo.map(([key, value]) => { 
             return(
-              <div key={index} className={toDoListStyles.listItem} onClick={() => {setView(!view); dispatch(readItem(index))}}>
+              <div key={key} className={toDoListStyles.listItem} onClick={() => {setView(!view)}}>
                 <div>
-                  <h3>{`${index + 1 }.`} {element.title}</h3>
-                  <p className={view === true ? toDoListStyles.descOpen: toDoListStyles.descClose}>{element.desc}</p>
+                  <h3>{value.content.title}</h3>
+                  <p className={view === true ? toDoListStyles.descOpen : toDoListStyles.descClose}>{value.content.desc}</p>
                 </div>
                 <div className={toDoListStyles.wrapper}>
                   <div className={toDoListStyles.item}>
@@ -72,15 +90,16 @@ const ToDoList = () => {
                       checked={checkAllState?checkAllState:null}
                     />
                   </div>
-                  <button className={toDoListStyles.item} type='button' >
+                  <button className={toDoListStyles.item} type='button' onClick={() => handleEdit(value, key)}>
                     <BiEdit className={toDoListStyles.icon} />
                   </button>
-                  <button className={toDoListStyles.item} type='button' onClick={() => handleDelete(index)}>
+                  <button className={toDoListStyles.item} type='button' onClick={() => handleDelete(key)}>
                     <IoMdTrash className={toDoListStyles.icon} />
                   </button>
                 </div>
               </div>
-            )})
+            )
+          })
         }
         </div>
       </div>

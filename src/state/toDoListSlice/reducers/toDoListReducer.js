@@ -1,41 +1,20 @@
-const initialState = {
-  toDoList: [],
-  loading: false
-}
+const initialState = []
 
 export const toDoListReducer = (state=initialState, {type, payload}) => {
   switch (type) {
 
     // CRUD OPERATIONS
     case 'CREATE_ITEM':
-      return {
-        ...state, 
-        toDoList: [...state.toDoList, payload],
-      }
+      return [...state, payload]
       
     case 'READ_ITEM':
-      return {
-        ...state,
-        toDoList: payload,
-        loading: false
-      }
+      return [payload]
 
     case 'UPDATE_ITEM':
-      return {
-        ...state
-      }
+      return [...state, state.splice(1, payload.key, payload.item)]
 
     case 'DELETE_ITEM':
-      return {
-        ...state,
-        toDoList: state.toDoList.filter((element, index) => index !== payload )
-      }
-
-    case 'LOADING_ITEMS':
-      return {
-        ...state,
-        loading: true
-      }
+      return {...state, toDoList:state.toDoList.splice(payload)}
 
     case 'DELETE_ITEMS':
       state = []

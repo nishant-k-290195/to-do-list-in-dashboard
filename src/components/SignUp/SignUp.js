@@ -21,7 +21,6 @@ const SignUp = () => {
     e.preventDefault()
     const {email, password, fName, lName} = signUpState
     signUp(email, password, fName, lName)
-    console.log(email)
   }
 
   return (

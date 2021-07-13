@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import AddTaskStyles from './AddTask.module.css'
 import { addItem } from '../../state/toDoListSlice/actions/action'
 import { useDispatch } from "react-redux";
 import { GrAdd } from 'react-icons/gr'
+import { createItem } from '../../api/toDoList'
+import { firebaseApp } from '../../firebase';
 
 const AddTask = () => {
   const [newTask, setNewTask] = useState({ title:'', desc:'' })
@@ -14,7 +16,10 @@ const AddTask = () => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    dispatch(addItem(newTask))
+    // dispatch(addItem(newTask))
+  
+    const uid = firebaseApp.auth().currentUser.uid
+    createItem(uid, newTask)
   }
 
   return (

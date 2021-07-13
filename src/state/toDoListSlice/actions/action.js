@@ -25,7 +25,7 @@ export const updateItem = payload => async dispatch => {
   )
 }
 
-export const deleteItem = payload => dispatch => {
+export const deleteItem = payload => async dispatch => {
   return dispatch(
     {
       type: 'DELETE_ITEM',
