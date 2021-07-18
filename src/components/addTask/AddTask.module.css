@@ -1,5 +1,5 @@
 .main{
-  height: 15rem;
+  height: 50vh;
 }
 
 .card input, textarea{
@@ -46,14 +46,23 @@
   right: 2rem;
   height: 3rem;
   width: 3rem;
+  padding: .5rem;
   border-radius: 50%;
   background-color: rgb(255, 184, 4);
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: .3s;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .add:hover{
   transition: .3s;
   transform: scale(.9);
+}
+
+.icon{
+  height: 100%;
+  width: 100%;
 }

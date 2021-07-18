@@ -66,7 +66,6 @@
   align-items: center;
   grid-template-columns: repeat(3, max-content);
   column-gap:1rem;
-
 }
 
 .item{
@@ -77,12 +76,23 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
+  transition: .3s;
+
+}
+
+.item:hover{
+  transition: .3s;
+  transform: scale(.8);
 }
 
 .icon{
   height: 1.5rem;
   width: 1.5rem;
   color: #feb803;
+  z-index: 200;
+}
+.icon:hover{
+  color: rgb(45, 240, 19);
 }
 
 .descOpen{
@@ -91,6 +101,8 @@
   background-color: aliceblue;
   margin-top: 2.5rem;
 }
+
 .descClose{
+  transition: .3s;
   display: none;
 }

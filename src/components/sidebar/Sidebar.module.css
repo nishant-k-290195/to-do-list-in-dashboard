@@ -1,5 +1,5 @@
 .sidebarSection{
-  background-color: black;
+  background-color: rgba(8, 3, 85, 0.678);
   grid-area: sidebar;
   height: 100%;
   width: 2.5rem;
@@ -14,7 +14,7 @@
   display: grid;
   justify-content: center;
   align-items: start;
-  background-color: black;
+  background-color: rgb(38, 27, 187);
   height: 100%;
   width: 14rem;
   grid-area: sidebar;

@@ -1,10 +1,19 @@
 .container{
-  grid-area: main;
+  /* grid-area: main; */
   display: grid;
-  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
   align-items: center;
-  grid-gap: 8rem;
   height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  /* grid-template-columns: repeat(2, max-content); */
+  /* grid-gap: 8rem; */
+}
+
+.video{
+  height: 100%;
+  width: 100%;
 }
 
 .card{

@@ -1,33 +1,39 @@
 import React, { useState } from 'react'
 import AddTaskStyles from './AddTask.module.css'
-import { addItem } from '../../state/toDoListSlice/actions/action'
-import { useDispatch } from "react-redux";
 import { GrAdd } from 'react-icons/gr'
-import { createItem } from '../../api/toDoList'
+import { createItem, updateItem } from '../../api/toDoList'
 import { firebaseApp } from '../../firebase';
+import {RiSaveFill} from 'react-icons/ri'
 
-const AddTask = () => {
+const AddTask = ({state, postValue}) => {
   const [newTask, setNewTask] = useState({ title:'', desc:'' })
-  const dispatch = useDispatch()
-
   const handleChange = (e) => {
-    setNewTask(prev => ({ ...prev, [e.target.name]: e.target.value} ))
+    if(state){
+      setNewTask(prev => ({title: postValue.title, desc: postValue.desc}))
+    }
+    else{
+      setNewTask(prev => ({ ...prev, [e.target.name]: e.target.value}))
+    }
   }
 
-  const handleClick = (e) => {
+  const handleAdd = (e) => {
     e.preventDefault()
-    // dispatch(addItem(newTask))
-  
     const uid = firebaseApp.auth().currentUser.uid
     createItem(uid, newTask)
+  }
+
+  const handleSave = (e) => {
+    e.preventDefault()
+    const uid = firebaseApp.auth().currentUser.uid
+    updateItem(uid, postValue)
   }
 
   return (
     <form className={AddTaskStyles.main}>
       <div className={AddTaskStyles.card}>
-        <input name='title' type="text" placeholder='Title' onChange={handleChange} />
-        <textarea name='desc' type="text" placeholder='Describe...' onChange={handleChange} />
-        <button className={AddTaskStyles.add} onClick={handleClick}><GrAdd /></button>
+        <input name='title' type="text" placeholder='Title' onChange={handleChange} value={newTask.title}/>
+        <textarea name='desc' type="text" placeholder='Describe...' onChange={handleChange} value={newTask.desc}/>
+        <button className={AddTaskStyles.add} onClick={handleAdd}><GrAdd className={AddTaskStyles.icon} /></button>
       </div>
     </form>
   )

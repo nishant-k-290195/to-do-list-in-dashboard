@@ -28,12 +28,18 @@ export const createItem = async (uid, content) => {
 //   }
 // }
 
-export const updateItem = async (uid, toDoItem) => {
-  await toDoListRef.once('toDoItem', snap => snap.val())
+export const updateItem = async (uid, content) => {
+  try{
+    await toDoListRef(`toDoList/${uid}`).set({
+      content
+    })
+  }catch(err){
+    console.log(err)
+  }
 }
 
-export const deleteItem = async (uid, toDoItem) => {
-  await toDoListRef.once('toDoItem', snap => snap.val())
+export const deleteItem = async (itemKey) => {
+  await toDoListRef.child(itemKey).remove()
 }
 
 export const deleteItems = async (uid, toDoItem) => {
